@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* -------------------- */
+/* Global */
+/* -------------------- */
+
+.gradio-container {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    font-family: "Inter", sans-serif;
+}
+
+footer {
+    display: none !important;
+}
+
+/* -------------------- */
+/* Header */
+/* -------------------- */
+
+#title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+    margin-top: 15px;
+}
+
+#subtitle {
+    text-align: center;
+    color: #cbd5e1;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+/* -------------------- */
+/* Chatbot */
+/* -------------------- */
+
+#chatbot {
+    height: 650px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+/* -------------------- */
+/* Textbox */
+/* -------------------- */
+
+textarea {
+    border-radius: 15px !important;
+    border: 2px solid #3b82f6 !important;
+    transition: .2s;
+}
+
+textarea:focus {
+    border-color: #60a5fa !important;
+    box-shadow: 0 0 12px rgba(96,165,250,.4);
+}
+
+/* -------------------- */
+/* Buttons */
+/* -------------------- */
+
+button {
+    border-radius: 14px !important;
+    transition: all .25s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59,130,246,.25);
+}
+
+/* -------------------- */
+/* Messages */
+/* -------------------- */
+
+.message {
+    animation: fade .35s ease;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* -------------------- */
+/* Scrollbar */
+/* -------------------- */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Make the whole page fill the screen */
+.gradio-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat area fills remaining space */
+#chat-area {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Chatbot expands automatically */
+#chat-area .gradio-chatbot {
+    flex: 1;
+    min-height: 0;
+}
+
+/* Textbox stays at bottom */
+#chat-area textarea {
+    margin-top: 10px;
+}
+
+[data-testid="examples"] button{
+    min-height: 42px;
+    max-height: 42px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    background: rgba(30,41,59,.85) !important;
+    border: 1px solid rgba(71,85,105,.6) !important;
+    color: #f8fafc !important;
+}
+
+[data-testid="examples"] button:hover{
+    background: #2563eb !important;
+    color: white !important;
+    border-color: #3b82f6 !important;
+}
