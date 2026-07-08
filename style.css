@@ -37,7 +37,6 @@ footer {
 /* -------------------- */
 
 #chatbot {
-    height: 650px;
     border-radius: 20px;
     border: 1px solid rgba(255,255,255,.08);
     box-shadow: 0 10px 30px rgba(0,0,0,.35);
@@ -109,11 +108,21 @@ button:hover {
     background: transparent;
 }
 
-/* Make the whole page fill the screen */
-.gradio-container {
-    min-height: 100vh;
+/* -------------------- */
+/* Layout: fit everything in the viewport, no page-level scroll */
+/* -------------------- */
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+#app-container.gradio-container {
+    height: 100vh;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 /* Chat area fills remaining space */
@@ -124,7 +133,7 @@ button:hover {
     min-height: 0;
 }
 
-/* Chatbot expands automatically */
+/* Chatbot expands automatically to fill whatever space is left */
 #chat-area .gradio-chatbot {
     flex: 1;
     min-height: 0;
@@ -134,6 +143,16 @@ button:hover {
 #chat-area textarea {
     margin-top: 10px;
 }
+
+/* Keep the persona accordion compact */
+.gr-accordion {
+    flex-shrink: 0;
+    margin-bottom: 6px;
+}
+
+/* -------------------- */
+/* Examples */
+/* -------------------- */
 
 [data-testid="examples"] button{
     min-height: 42px;

@@ -49,7 +49,7 @@ def get_text(content):
     return str(content)
 
 
-def respond(message, history):
+def respond(message, history, custom_system_prompt=None):
     # Stable enough for one browser session
     session_id = str(history)
 
@@ -68,7 +68,13 @@ def respond(message, history):
         if match:
             user_names[session_id] = match.group(1).title()
 
-    system_prompt = SYSTEM_PROMPT
+    # Use the custom persona/system prompt if the user filled it in,
+    # otherwise fall back to the default
+    system_prompt = (
+        custom_system_prompt.strip()
+        if custom_system_prompt and custom_system_prompt.strip()
+        else SYSTEM_PROMPT
+    )
 
     if user_names[session_id]:
         system_prompt += (
@@ -114,7 +120,7 @@ def respond(message, history):
                 yield reply
 
 
-with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo: # to ensure css is loaded
+with gr.Blocks(css=css, theme=gr.themes.Soft(), elem_id="app-container") as demo:
     with gr.Sidebar():
         gr.Markdown("## Previous Chats")
 
@@ -124,9 +130,18 @@ with gr.Blocks(css=css, theme=gr.themes.Soft()) as demo: # to ensure css is load
         )
 
         new_chat = gr.Button("➕ New Chat")
-        
+
+    with gr.Accordion("⚙️ System Prompt / Persona", open=False):
+        system_prompt_box = gr.Textbox(
+            label="",
+            placeholder="Leave empty for default assistant, or type a custom persona (e.g. 'You are a sarcastic pirate who explains code').",
+            lines=2,
+            show_label=False,
+        )
+
     gr.ChatInterface(
         fn=respond,
+        additional_inputs=[system_prompt_box],
         title="Omar's AI Chatbot",
         description="What's on your mind today?",
         examples=[
